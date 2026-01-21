@@ -16,6 +16,7 @@ const SearchContainer = styled(View)`
 const List = styled(View)`
   flex: 1;
   padding: 16px;
+  background-color: ${props => props.theme.colors.brand.primary};
 `;
 
 const RestaurantsScreen = () => {

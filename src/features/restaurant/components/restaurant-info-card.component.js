@@ -1,9 +1,10 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { Card } from 'react-native-paper';
 import styled from 'styled-components/native';
 
-const Title = styled(Card.Title)`
-  color: blue;
+const Title = styled(Text)`
+  color: ${props => props.theme.colors.ui.primary};
 `;
 
 const Cover = styled(Card.Cover)`
@@ -25,7 +26,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
 
   return (
     <Card>
-      <Title title={name} />
+      <Title>{name}</Title>
       <Cover source={{ uri: photos[0] }} />
     </Card>
   );
