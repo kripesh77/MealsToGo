@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Searchbar } from 'react-native-paper';
 
 const Search = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('36. Adding the address');
   return (
     <Searchbar
       value={value}
