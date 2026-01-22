@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import { SvgXml } from 'react-native-svg';
 import Star from '../../../../assets/Star';
 import Open from '../../../../assets/Open';
+import { Spacer } from '../../../components/spacer/spacer.component';
 
 const Title = styled(Text)`
   font-family: ${props => props.theme.fonts.heading};
@@ -29,7 +30,6 @@ const Rating = styled.View`
 const SectionEnd = styled.View`
   flex-direction: row;
   align-items: center;
-  gap: ${props => props.theme.space[2]};
 `;
 
 const Section = styled.View`
@@ -80,8 +80,12 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
           </Rating>
           <SectionEnd>
             {isClosedTemporarily && <ClosedText>CLOSED TEMPORARILY</ClosedText>}
-            {isOpenNow ? <SvgXml xml={Open} width={20} height={20} /> : null}
-            <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            <Spacer position="left" size="medium">
+              {isOpenNow ? <SvgXml xml={Open} width={20} height={20} /> : null}
+            </Spacer>
+            <Spacer position="left" size="medium">
+              <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            </Spacer>
           </SectionEnd>
         </Section>
         <Address>{address}</Address>
