@@ -1,9 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import RestaurantInfoCard from '../components/restaurant-info-card.component';
 import styled from 'styled-components/native';
 import Search from './Search';
+import { Spacer } from '../../../components/spacer/spacer.component';
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
@@ -13,12 +14,6 @@ const SearchContainer = styled(View)`
   padding: ${props => props.theme.space[3]};
 `;
 
-const List = styled(View)`
-  flex: 1;
-  padding: ${props => props.theme.space[3]};
-  background-color: ${props => props.theme.colors.brand.primary};
-`;
-
 const RestaurantsScreen = () => {
   return (
     <SafeAreaProvider>
@@ -26,9 +21,37 @@ const RestaurantsScreen = () => {
         <SearchContainer>
           <Search />
         </SearchContainer>
-        <List>
-          <RestaurantInfoCard />
-        </List>
+        <FlatList
+          data={[
+            { name: 'abc' },
+            { name: 'asdfsaf' },
+            { name: 'abfasc' },
+            { name: 'asfasdfasdf' },
+            { name: 'abasfasffc' },
+            { name: 'asasdfasdffdf' },
+            { name: 'aasdfabc' },
+            { name: 'asasasdf' },
+            { name: 'abzxc' },
+            { name: 'asdasfaf' },
+            { name: 'ab4rtc' },
+            { name: 'asdsdfgf' },
+            { name: 'abw45vc' },
+            { name: 'asvwertbdf' },
+            { name: 'abwertwdfc' },
+            { name: 'asbwertwervdf' },
+            { name: 'abvwertc' },
+            { name: 'asvwertdf' },
+          ]}
+          renderItem={() => (
+            <>
+              <Spacer position="bottom" size="large">
+                <RestaurantInfoCard />
+              </Spacer>
+            </>
+          )}
+          keyExtractor={item => item.name}
+          contentContainerStyle={{ padding: 16 }}
+        />
       </SafeArea>
     </SafeAreaProvider>
   );
