@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { RestaurantsScreen } from './src/features/restaurant/screen/restaurants.screen';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './src/infrastructure/theme';
+import { Ionicons } from '@expo/vector-icons';
 
 import {
   useFonts as useFontsOswald,
@@ -19,6 +20,12 @@ import { SafeArea } from './src/components/utility/safe-area.component';
 
 const Tab = createBottomTabNavigator();
 
+const TAB_ICON = {
+  Restaurants: 'restaurant',
+  Maps: 'map',
+  Settings: 'settings',
+};
+
 export default function App() {
   const [oswaldFontLoaded] = useFontsOswald({
     Oswald_400Regular,
@@ -34,7 +41,21 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-          <Tab.Navigator>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ color, size }) => {
+                return (
+                  <Ionicons
+                    name={TAB_ICON[route.name]}
+                    size={size}
+                    color={color}
+                  />
+                );
+              },
+              tabBarActiveTintColor: 'tomato',
+              tabBarInactiveTintColor: 'gray',
+            })}
+          >
             <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
             <Tab.Screen name="Maps" component={Maps} />
             <Tab.Screen name="Settings" component={Settings} />
