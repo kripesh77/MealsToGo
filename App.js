@@ -26,6 +26,16 @@ const TAB_ICON = {
   Settings: 'settings',
 };
 
+const screenOptions = ({ route }) => {
+  return {
+    tabBarIcon: ({ color, size }) => {
+      return <Ionicons name={TAB_ICON[route.name]} size={size} color={color} />;
+    },
+    tabBarActiveTintColor: 'tomato',
+    tabBarInactiveTintColor: 'gray',
+  };
+};
+
 export default function App() {
   const [oswaldFontLoaded] = useFontsOswald({
     Oswald_400Regular,
@@ -41,21 +51,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ color, size }) => {
-                return (
-                  <Ionicons
-                    name={TAB_ICON[route.name]}
-                    size={size}
-                    color={color}
-                  />
-                );
-              },
-              tabBarActiveTintColor: 'tomato',
-              tabBarInactiveTintColor: 'gray',
-            })}
-          >
+          <Tab.Navigator screenOptions={screenOptions}>
             <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
             <Tab.Screen name="Maps" component={Maps} />
             <Tab.Screen name="Settings" component={Settings} />
