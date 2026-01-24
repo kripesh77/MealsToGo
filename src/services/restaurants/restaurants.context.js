@@ -1,16 +1,49 @@
-import React, { createContext, useContext } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+} from 'react';
+import {
+  restaurantsRequest,
+  restaurantsTransform,
+} from './restaurants.service';
 
 const RestaurantsContext = createContext();
 
 export const RestaurantsProvider = ({ children }) => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const value = useMemo(
+    () => ({
+      restaurants,
+      isLoading,
+      error,
+    }),
+    [restaurants, isLoading, error]
+  );
+
+  useEffect(function () {
+    async function fetchRestaurants() {
+      setIsLoading(true);
+      try {
+        const res = await restaurantsRequest();
+        const data = restaurantsTransform(res);
+        setRestaurants(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchRestaurants();
+  }, []);
+
   return (
-    <RestaurantsContext.Provider
-      value={{
-        restaurants: [
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        ],
-      }}
-    >
+    <RestaurantsContext.Provider value={value}>
       {children}
     </RestaurantsContext.Provider>
   );

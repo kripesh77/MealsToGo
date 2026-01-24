@@ -36,31 +36,35 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
   // [undefined, undefined, undefined, undefined]
 
   return (
-    <Card>
-      <RestaurantCardCover source={{ uri: photos[0] }} />
-      <Info>
-        <Text variant="label">{name}</Text>
-        <Section>
-          <Rating>
-            {starArray.map((_, i) => (
-              <SvgXml xml={Star} width={20} height={20} key={i} />
-            ))}
-          </Rating>
-          <SectionEnd>
-            {isClosedTemporarily && (
-              <Text variant="error">CLOSED TEMPORARILY</Text>
-            )}
-            <Spacer position="left" size="medium">
-              {isOpenNow ? <SvgXml xml={Open} width={20} height={20} /> : null}
-            </Spacer>
-            <Spacer position="left" size="medium">
-              <Icon source={{ uri: icon }} />
-            </Spacer>
-          </SectionEnd>
-        </Section>
-        <Text variant="hint">{address}</Text>
-      </Info>
-    </Card>
+    <Spacer position="bottom" size="large">
+      <Card>
+        <RestaurantCardCover source={{ uri: photos[0] }} />
+        <Info>
+          <Text variant="label">{name}</Text>
+          <Section>
+            <Rating>
+              {starArray.map((_, i) => (
+                <SvgXml xml={Star} width={20} height={20} key={i} />
+              ))}
+            </Rating>
+            <SectionEnd>
+              {isClosedTemporarily && (
+                <Text variant="error">CLOSED TEMPORARILY</Text>
+              )}
+              <Spacer position="left" size="medium">
+                {isOpenNow ? (
+                  <SvgXml xml={Open} width={20} height={20} />
+                ) : null}
+              </Spacer>
+              <Spacer position="left" size="medium">
+                <Icon source={{ uri: icon }} />
+              </Spacer>
+            </SectionEnd>
+          </Section>
+          <Text variant="hint">{address}</Text>
+        </Info>
+      </Card>
+    </Spacer>
   );
 };
 
