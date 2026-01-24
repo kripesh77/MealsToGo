@@ -18,6 +18,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text } from 'react-native';
 import { SafeArea } from './src/components/utility/safe-area.component';
 
+import { restaurantsRequest } from './src/services/restaurants/mock/restaurants.service';
+
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
