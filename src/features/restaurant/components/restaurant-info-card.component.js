@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Card } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import Star from '../../../../assets/Star';
@@ -7,7 +7,6 @@ import { Spacer } from '../../../components/spacer/spacer.component';
 
 import { Text } from '../../../components/typography/text.component';
 import {
-  Address,
   Icon,
   Info,
   Rating,
@@ -68,4 +67,4 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
   );
 };
 
-export default RestaurantInfoCard;
+export default memo(RestaurantInfoCard);
