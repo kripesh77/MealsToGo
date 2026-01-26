@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Pressable } from 'react-native';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import styled from 'styled-components/native';
 import Search from '../components/search.component';
@@ -21,16 +21,22 @@ const LoadingContainer = styled.View`
   left: 50%;
 `;
 
-export const RestaurantsScreen = () => {
+// navigation prop is injected automatically by react navigation stack
+export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoadingRestaurants } = useRestaurants();
 
-  const renderItem = useCallback(({ item }) => {
-    return (
-      <Spacer position="bottom" size="large">
-        <RestaurantInfoCard restaurant={item} />
-      </Spacer>
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({ item }) => {
+      return (
+        <Pressable onPress={() => navigation.navigate('RestaurantDetail')}>
+          <Spacer position="bottom" size="large">
+            <RestaurantInfoCard restaurant={item} />
+          </Spacer>
+        </Pressable>
+      );
+    },
+    [navigation]
+  );
 
   const keyExtractor = useCallback(item => item.placeId || item.name, []);
 
