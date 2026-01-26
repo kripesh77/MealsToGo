@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { FlatList, Platform, Pressable, TouchableOpacity } from 'react-native';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import styled from 'styled-components/native';
-import Search from '../components/search.component';
+import { Search } from '../components/search.component';
 import { SafeArea } from '../../../components/utility/safe-area.component';
 import { useRestaurants } from '../../../services/restaurants/restaurants.context';
 import { Spacer } from '../../../components/spacer/spacer.component';
