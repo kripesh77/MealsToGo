@@ -35,6 +35,7 @@ export const Search = () => {
     <SearchContainer>
       <Searchbar
         value={value}
+        icon="map"
         onChangeText={handleChangeText}
         placeholder="Search for a location"
         onSubmitEditing={handleSubmitEditing}

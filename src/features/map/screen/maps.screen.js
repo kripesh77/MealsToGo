@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 import MapView, { Marker } from 'react-native-maps';
 import { Search } from '../search.component';
+import { useLocation } from '../../../services/location/location.context';
 
 const Map = styled(MapView)`
   height: 100%;
@@ -14,15 +15,16 @@ const dummyCoordinates = {
 };
 
 export const MapScreen = () => {
+  const { location } = useLocation();
   return (
     <>
       <Search />
       <Map
-        initialRegion={{
-          latitude: dummyCoordinates.latitude,
-          longitude: dummyCoordinates.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+        region={{
+          latitude: location.lat,
+          longitude: location.lng,
+          latitudeDelta: 1,
+          longitudeDelta: 1,
         }}
       >
         <Marker
