@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { useMemo } from 'react';
 import { Card } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import Star from '../../../../assets/Star';
@@ -15,7 +15,7 @@ import {
   SectionEnd,
 } from './restaurant-info-card-styles';
 
-export const RestaurantInfoCard = ({ restaurant = {} }) => {
+export const RestaurantInfoCard = React.memo(({ restaurant = {} }) => {
   const {
     name = 'Some Restaurant',
     icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
@@ -28,11 +28,11 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     isClosedTemporarily = true,
   } = restaurant;
 
-  // Array.from({length: 5}, (_, i) => i + 1); gives:
-  // [1, 2, 3, 4, 5];
-  const starArray = Array.from({ length: rating });
-  // console.log(starArray);
-  // [undefined, undefined, undefined, undefined]
+  const ratingStars = useMemo(() => {
+    return Array.from({ length: Math.floor(rating) }, (_, i) => (
+      <SvgXml xml={Star} width={20} height={20} key={i} />
+    ));
+  }, [rating]);
 
   return (
     <Spacer position="bottom" size="large">
@@ -41,19 +41,13 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
         <Info>
           <Text variant="label">{name}</Text>
           <Section>
-            <Rating>
-              {starArray.map((_, i) => (
-                <SvgXml xml={Star} width={20} height={20} key={i} />
-              ))}
-            </Rating>
+            <Rating>{ratingStars}</Rating>
             <SectionEnd>
               {isClosedTemporarily && (
                 <Text variant="error">CLOSED TEMPORARILY</Text>
               )}
               <Spacer position="left" size="medium">
-                {isOpenNow ? (
-                  <SvgXml xml={Open} width={20} height={20} />
-                ) : null}
+                {isOpenNow && <SvgXml xml={Open} width={20} height={20} />}
               </Spacer>
               <Spacer position="left" size="medium">
                 <Icon source={{ uri: icon }} />
@@ -65,6 +59,4 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
       </Card>
     </Spacer>
   );
-};
-
-export default memo(RestaurantInfoCard);
+});

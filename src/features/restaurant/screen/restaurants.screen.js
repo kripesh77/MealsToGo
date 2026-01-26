@@ -1,48 +1,48 @@
 import React, { useCallback } from 'react';
-import { FlatList, View } from 'react-native';
-import RestaurantInfoCard from '../components/restaurant-info-card.component';
+import { FlatList } from 'react-native';
+import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import styled from 'styled-components/native';
-import Search from './Search';
+import Search from '../components/search.component';
 import { SafeArea } from '../../../components/utility/safe-area.component';
 import { useRestaurants } from '../../../services/restaurants/restaurants.context';
-import { FullScreenLoader } from '../../../components/FullScreenLoader';
-
-const SearchContainer = styled(View)`
-  padding: ${props => props.theme.space[3]};
-`;
+import { Spacer } from '../../../components/spacer/spacer.component';
+import { ActivityIndicator } from 'react-native-paper';
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: { padding: 16 },
 })``;
 
+const Loading = styled(ActivityIndicator)`
+  margin-left: -25px;
+`;
+const LoadingContainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
+
 export const RestaurantsScreen = () => {
-  const { restaurants, isLoading } = useRestaurants();
-
-  const renderRestaurant = useCallback(({ item }) => {
-    return <RestaurantInfoCard restaurant={item} />;
-  }, []);
-
-  const keyExtractor = useCallback(item => item.name, []);
+  const { restaurants, isLoadingRestaurants } = useRestaurants();
 
   return (
     <SafeArea>
-      <SearchContainer>
-        <Search />
-      </SearchContainer>
-      {isLoading ? (
-        <FullScreenLoader />
-      ) : (
-        <RestaurantList
-          data={restaurants}
-          renderItem={renderRestaurant}
-          keyExtractor={keyExtractor}
-          initialNumToRender={10}
-          maxToRenderPerBatch={10}
-          windowSize={10}
-          removeClippedSubviews={true}
-          updateCellsBatchingPeriod={50}
-        />
+      {isLoadingRestaurants && (
+        <LoadingContainer>
+          <Loading size={50} animating={true} color="blue" />
+        </LoadingContainer>
       )}
+      <Search />
+      <RestaurantList
+        data={restaurants}
+        renderItem={({ item }) => {
+          return (
+            <Spacer position="bottom" size="large">
+              <RestaurantInfoCard restaurant={item} />
+            </Spacer>
+          );
+        }}
+        keyExtractor={item => item.name}
+      />
     </SafeArea>
   );
 };

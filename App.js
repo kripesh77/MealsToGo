@@ -18,6 +18,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text } from 'react-native';
 import { SafeArea } from './src/components/utility/safe-area.component';
 import { RestaurantsProvider } from './src/services/restaurants/restaurants.context';
+import { LocationProvider } from './src/services/location/location.context';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,8 +33,6 @@ const screenOptions = ({ route }) => {
     tabBarIcon: ({ color, size }) => {
       return <Ionicons name={TAB_ICON[route.name]} size={size} color={color} />;
     },
-    tabBarActiveTintColor: 'tomato',
-    tabBarInactiveTintColor: 'gray',
   };
 };
 
@@ -51,15 +50,23 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <RestaurantsProvider>
-          <NavigationContainer>
-            <Tab.Navigator screenOptions={screenOptions}>
-              <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-              <Tab.Screen name="Maps" component={Maps} />
-              <Tab.Screen name="Settings" component={Settings} />
-            </Tab.Navigator>
-          </NavigationContainer>
-        </RestaurantsProvider>
+        <LocationProvider>
+          <RestaurantsProvider>
+            <NavigationContainer>
+              <Tab.Navigator
+                screenOptions={screenOptions}
+                tabBarOptions={{
+                  activeTintColor: 'tomato',
+                  inactiveTintColor: 'gray',
+                }}
+              >
+                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+                <Tab.Screen name="Maps" component={Maps} />
+                <Tab.Screen name="Settings" component={Settings} />
+              </Tab.Navigator>
+            </NavigationContainer>
+          </RestaurantsProvider>
+        </LocationProvider>
       </ThemeProvider>
       <StatusBar style="auto" hidden={true} />
     </>
@@ -69,9 +76,7 @@ export default function App() {
 const Maps = () => {
   return (
     <SafeArea>
-      <View style={{ flex: 1 }}>
-        <Text>Maps</Text>
-      </View>
+      <Text>Maps</Text>
     </SafeArea>
   );
 };
@@ -79,9 +84,7 @@ const Maps = () => {
 const Settings = () => {
   return (
     <SafeArea>
-      <View style={{ flex: 1 }}>
-        <Text>Settings</Text>
-      </View>
+      <Text>Settings</Text>
     </SafeArea>
   );
 };
