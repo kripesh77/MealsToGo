@@ -35,7 +35,7 @@ export default function App() {
           </RestaurantsProvider>
         </LocationProvider>
       </ThemeProvider>
-      <StatusBar style="auto" hidden={true} />
+      <StatusBar style="auto" />
     </>
   );
 }

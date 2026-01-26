@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { FlatList, Pressable } from 'react-native';
+import { FlatList, Platform, Pressable, TouchableOpacity } from 'react-native';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import styled from 'styled-components/native';
 import Search from '../components/search.component';
@@ -28,11 +28,16 @@ export const RestaurantsScreen = ({ navigation }) => {
   const renderItem = useCallback(
     ({ item }) => {
       return (
-        <Pressable onPress={() => navigation.navigate('RestaurantDetail')}>
-          <Spacer position="bottom" size="large">
+        <Spacer position="bottom" size="large">
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('RestaurantDetail', { restaurant: item })
+            }
+            activeOpacity={0.7}
+          >
             <RestaurantInfoCard restaurant={item} />
-          </Spacer>
-        </Pressable>
+          </TouchableOpacity>
+        </Spacer>
       );
     },
     [navigation]
