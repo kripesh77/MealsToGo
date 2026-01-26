@@ -24,6 +24,16 @@ const LoadingContainer = styled.View`
 export const RestaurantsScreen = () => {
   const { restaurants, isLoadingRestaurants } = useRestaurants();
 
+  const renderItem = useCallback(({ item }) => {
+    return (
+      <Spacer position="bottom" size="large">
+        <RestaurantInfoCard restaurant={item} />
+      </Spacer>
+    );
+  }, []);
+
+  const keyExtractor = useCallback(item => item.placeId || item.name, []);
+
   return (
     <SafeArea>
       {isLoadingRestaurants && (
@@ -34,14 +44,13 @@ export const RestaurantsScreen = () => {
       <Search />
       <RestaurantList
         data={restaurants}
-        renderItem={({ item }) => {
-          return (
-            <Spacer position="bottom" size="large">
-              <RestaurantInfoCard restaurant={item} />
-            </Spacer>
-          );
-        }}
-        keyExtractor={item => item.name}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        initialNumToRender={5}
+        maxToRenderPerBatch={10}
+        windowSize={10}
+        removeClippedSubviews={true}
+        updateCellsBatchingPeriod={50}
       />
     </SafeArea>
   );

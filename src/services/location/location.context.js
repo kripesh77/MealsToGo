@@ -4,6 +4,7 @@ import React, {
   useContext,
   useState,
   useMemo,
+  useEffect,
 } from 'react';
 import { locationRequest, locationTransform } from './location.service';
 
@@ -18,18 +19,24 @@ export const LocationProvider = ({ children }) => {
   const onSearch = useCallback(searchKeyword => {
     setIsLoadingLocation(true);
     setKeyword(searchKeyword);
-    if (!searchKeyword.length) return;
-    locationRequest(searchKeyword.toLowerCase())
-      .then(locationTransform)
-      .then(result => {
-        setIsLoadingLocation(false);
-        setLocation(result);
-      })
-      .catch(err => {
-        setIsLoadingLocation(false);
-        setError(err);
-      });
   }, []);
+
+  useEffect(
+    function () {
+      if (!keyword.length) return;
+      locationRequest(keyword.toLowerCase())
+        .then(locationTransform)
+        .then(result => {
+          setIsLoadingLocation(false);
+          setLocation(result);
+        })
+        .catch(err => {
+          setIsLoadingLocation(false);
+          setError(err);
+        });
+    },
+    [keyword]
+  );
 
   const value = useMemo(
     () => ({ isLoadingLocation, error, location, search: onSearch, keyword }),

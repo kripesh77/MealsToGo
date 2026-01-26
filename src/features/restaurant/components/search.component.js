@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import styled from 'styled-components/native';
@@ -11,10 +11,6 @@ const SearchContainer = styled(View)`
 const Search = () => {
   const { keyword, search } = useLocation();
   const [value, setValue] = useState(keyword);
-
-  useEffect(() => {
-    search(value);
-  }, [search, value]);
 
   const handleChangeText = text => {
     setValue(text);

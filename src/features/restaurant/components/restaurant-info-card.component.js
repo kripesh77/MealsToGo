@@ -28,11 +28,7 @@ export const RestaurantInfoCard = React.memo(({ restaurant = {} }) => {
     isClosedTemporarily = true,
   } = restaurant;
 
-  const ratingStars = useMemo(() => {
-    return Array.from({ length: Math.floor(rating) }, (_, i) => (
-      <SvgXml xml={Star} width={20} height={20} key={i} />
-    ));
-  }, [rating]);
+  const ratingArray = Array.from({ length: Math.floor(rating) });
 
   return (
     <Spacer position="bottom" size="large">
@@ -41,7 +37,11 @@ export const RestaurantInfoCard = React.memo(({ restaurant = {} }) => {
         <Info>
           <Text variant="label">{name}</Text>
           <Section>
-            <Rating>{ratingStars}</Rating>
+            <Rating>
+              {ratingArray.map((_, i) => (
+                <SvgXml xml={Star} width={20} height={20} key={i} />
+              ))}
+            </Rating>
             <SectionEnd>
               {isClosedTemporarily && (
                 <Text variant="error">CLOSED TEMPORARILY</Text>
