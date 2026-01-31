@@ -14,6 +14,7 @@ import {
 import { RestaurantsProvider } from './src/services/restaurants/restaurants.context';
 import { LocationProvider } from './src/services/location/location.context';
 import { Navigation } from './src/infrastructure/navigator';
+import { FavouritesProvider } from './src/services/favourites/favourites.context';
 
 export default function App() {
   const [oswaldFontLoaded] = useFontsOswald({
@@ -29,11 +30,13 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <LocationProvider>
-          <RestaurantsProvider>
-            <Navigation />
-          </RestaurantsProvider>
-        </LocationProvider>
+        <FavouritesProvider>
+          <LocationProvider>
+            <RestaurantsProvider>
+              <Navigation />
+            </RestaurantsProvider>
+          </LocationProvider>
+        </FavouritesProvider>
       </ThemeProvider>
       <StatusBar style="auto" />
     </>

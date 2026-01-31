@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FlatList, Platform, Pressable, TouchableOpacity } from 'react-native';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import styled from 'styled-components/native';
@@ -7,6 +7,8 @@ import { SafeArea } from '../../../components/utility/safe-area.component';
 import { useRestaurants } from '../../../services/restaurants/restaurants.context';
 import { Spacer } from '../../../components/spacer/spacer.component';
 import { ActivityIndicator } from 'react-native-paper';
+import { useFavourites } from '../../../services/favourites/favourites.context';
+import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: { padding: 16 },
@@ -23,7 +25,9 @@ const LoadingContainer = styled.View`
 
 // navigation prop is injected automatically by react navigation stack
 export const RestaurantsScreen = ({ navigation }) => {
+  const [isFavouritesToggled, setIsFavouritesToggled] = useState(false);
   const { restaurants, isLoadingRestaurants } = useRestaurants();
+  const { favourites } = useFavourites();
 
   const renderItem = useCallback(
     ({ item }) => {
@@ -52,7 +56,21 @@ export const RestaurantsScreen = ({ navigation }) => {
           <Loading size={50} animating={true} color="blue" />
         </LoadingContainer>
       )}
-      <Search />
+      <Search
+        isFavouritesToggled={isFavouritesToggled}
+        onFavouritesToggle={() => setIsFavouritesToggled(!isFavouritesToggled)}
+      />
+      {isFavouritesToggled && (
+        <FavouritesBar
+          favourites={favourites}
+          onDetail={restaurant =>
+            navigation.navigate('Restaurants', {
+              screen: 'RestaurantDetail',
+              params: { restaurant },
+            })
+          }
+        />
+      )}
       <RestaurantList
         data={restaurants}
         renderItem={renderItem}

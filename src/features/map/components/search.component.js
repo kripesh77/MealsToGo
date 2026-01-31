@@ -6,9 +6,13 @@ import { useLocation } from '../../../services/location/location.context';
 
 const SearchContainer = styled(View)`
   padding: ${props => props.theme.space[3]};
+  position: absolute;
+  z-index: 999;
+  top: 5%;
+  width: 100%;
 `;
 
-export const Search = ({ isFavouritesToggled, onFavouritesToggle }) => {
+export const Search = () => {
   const { keyword, search } = useLocation();
   const [value, setValue] = useState(keyword);
 
@@ -30,11 +34,8 @@ export const Search = ({ isFavouritesToggled, onFavouritesToggle }) => {
   return (
     <SearchContainer>
       <Searchbar
-        icon={`${isFavouritesToggled ? 'heart' : 'heart-outline'}`}
-        iconColor="red"
-        rippleColor="#edbea6"
-        onIconPress={onFavouritesToggle}
         value={value}
+        icon="map"
         onChangeText={handleChangeText}
         placeholder="Search for a location"
         onSubmitEditing={handleSubmitEditing}

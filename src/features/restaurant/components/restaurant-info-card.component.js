@@ -4,6 +4,7 @@ import { SvgXml } from 'react-native-svg';
 import Star from '../../../../assets/Star';
 import Open from '../../../../assets/Open';
 import { Spacer } from '../../../components/spacer/spacer.component';
+import { Favourite } from '../../../components/favourites/favourite.component';
 
 import { Text } from '../../../components/typography/text.component';
 import {
@@ -33,6 +34,7 @@ export const RestaurantInfoCard = React.memo(({ restaurant = {} }) => {
   return (
     <Spacer position="bottom" size="large">
       <Card>
+        <Favourite restaurant={restaurant} />
         <RestaurantCardCover source={{ uri: photos[0] }} />
         <Info>
           <Text variant="label">{name}</Text>
