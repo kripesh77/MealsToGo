@@ -10,18 +10,16 @@ const FavouriteWrapper = styled.View`
 `;
 
 export const FavouritesBar = ({ favourites, onDetail }) => {
+  if (!favourites.length) return null;
   return (
     <FavouriteWrapper>
       <Text variant="hint">Favourites</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {favourites.map(restaurant => {
           return (
-            <Spacer position="left" size="medium">
+            <Spacer position="left" size="medium" key={restaurant.placeId}>
               <TouchableOpacity onPress={() => onDetail(restaurant)}>
-                <CompactRestaurantInfo
-                  key={restaurant.placeId}
-                  restaurant={restaurant}
-                />
+                <CompactRestaurantInfo restaurant={restaurant} />
               </TouchableOpacity>
             </Spacer>
           );

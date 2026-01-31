@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import styled from 'styled-components/native';
-import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import { useFavourites } from '../../services/favourites/favourites.context';
 
@@ -27,8 +26,8 @@ export const Favourite = ({ restaurant }) => {
           : addToFavourites(restaurant)
       }
     >
-      <AntDesign
-        name={`${isFavourite ? 'heart' : 'book'}`}
+      <Entypo
+        name={`${isFavourite ? 'heart' : 'heart-outlined'}`}
         size={24}
         color="red"
       />
