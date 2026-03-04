@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeArea } from '../../components/utility/safe-area.component';
 import { Text } from '../../components/typography/text.component';
@@ -33,30 +32,28 @@ const Settings = () => {
 
 export const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={screenOptions}
-        tabBarOptions={{
-          activeTintColor: 'tomato',
-          inactiveTintColor: 'gray',
-        }}
-      >
-        <Tab.Screen
-          name="Restaurants"
-          component={RestaurantsNavigator}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen
-          name="Maps"
-          component={MapScreen}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen
-          name="Settings"
-          component={Settings}
-          options={{ headerShown: false }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator
+      screenOptions={screenOptions}
+      tabBarOptions={{
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'gray',
+      }}
+    >
+      <Tab.Screen
+        name="Restaurants"
+        component={RestaurantsNavigator}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Maps"
+        component={MapScreen}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{ headerShown: false }}
+      />
+    </Tab.Navigator>
   );
 };

@@ -15,6 +15,7 @@ import {
   Section,
   SectionEnd,
 } from './restaurant-info-card-styles';
+import { mockImages } from '../../../services/restaurants/mock';
 
 export const RestaurantInfoCard = React.memo(({ restaurant = {} }) => {
   const {
@@ -31,11 +32,14 @@ export const RestaurantInfoCard = React.memo(({ restaurant = {} }) => {
 
   const ratingArray = Array.from({ length: Math.floor(rating) });
 
+  const imageIndex = restaurant.name.length % mockImages.length;
+  const photo = mockImages[imageIndex];
+
   return (
     <Spacer position="bottom" size="large">
       <Card>
         <Favourite restaurant={restaurant} />
-        <RestaurantCardCover source={{ uri: photos[0] }} />
+        <RestaurantCardCover source={{ uri: photo }} />
         <Info>
           <Text variant="label">{name}</Text>
           <Section>
