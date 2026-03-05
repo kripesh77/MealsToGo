@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Button } from 'react-native-paper';
 import { colors } from '../../../infrastructure/theme/colors';
+import { Text } from '../../../components/typography/text.component';
 
 export const AccountBackground = styled.ImageBackground.attrs({
   source: require('../../../../assets/home_bg.jpg'),
@@ -22,6 +23,8 @@ export const AccountContainer = styled.View`
   background-color: rgba(255, 255, 255, 0.7);
   padding: ${props => props.theme.space[4]};
   margin-top: ${props => props.theme.space[2]};
+  border-radius: 12px;
+  width: 90%;
 `;
 
 export const AuthButton = styled(Button).attrs({
@@ -29,4 +32,8 @@ export const AuthButton = styled(Button).attrs({
   textColor: colors.text.inverse,
 })`
   padding: ${props => props.theme.space[2]};
+`;
+
+export const Title = styled(Text)`
+  font-size: 30px;
 `;

@@ -5,6 +5,8 @@ import { SafeArea } from '../../components/utility/safe-area.component';
 import { Text } from '../../components/typography/text.component';
 import { RestaurantsNavigator } from './restaurants.navigator';
 import { MapScreen } from '../../features/map/screen/maps.screen';
+import { Button } from 'react-native-paper';
+import { useAuthentication } from '../../services/authentication/authentication.context';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,9 +25,13 @@ const screenOptions = ({ route }) => {
 };
 
 const Settings = () => {
+  const { logout } = useAuthentication();
   return (
     <SafeArea>
       <Text>Settings</Text>
+      <Button buttonColor="blue" textColor="white" onPress={logout}>
+        Logout
+      </Button>
     </SafeArea>
   );
 };

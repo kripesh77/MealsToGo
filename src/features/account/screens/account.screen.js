@@ -7,6 +7,7 @@ import {
   AccountCover,
   AccountContainer,
   AuthButton,
+  Title,
 } from '../components/account.styles';
 import { Spacer } from '../../../components/spacer/spacer.component';
 
@@ -14,9 +15,8 @@ export const AccountScreen = ({ navigation }) => (
   <SafeArea>
     <AccountBackground>
       <AccountCover />
-
+      <Title variant="body">Meals To Go</Title>
       <AccountContainer>
-        <Text variant="label">Account</Text>
         <AuthButton
           icon="lock-open-outline"
           onPress={() => navigation.navigate('Login')}

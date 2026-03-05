@@ -1,11 +1,6 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
-import { SafeArea } from '../../components/utility/safe-area.component';
 
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { AccountScreen } from '../../features/account/screens/account.screen';
 import { LoginScreen } from '../../features/account/screens/login.screen';
 import { RegisterScreen } from '../../features/account/screens/register.screen';
@@ -17,7 +12,7 @@ export const AuthenticationNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        ...TransitionPresets.ModalPresentationIOS,
+        animation: 'slide_from_right',
       }}
     >
       <Stack.Screen name="Account" component={AccountScreen} />
