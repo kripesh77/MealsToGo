@@ -12,6 +12,7 @@ import { Spacer } from '../../../components/spacer/spacer.component';
 import { useFavourites } from '../../../services/favourites/favourites.context';
 import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
 import { TouchableOpacity } from 'react-native';
+import { FadeInView } from '../../../components/animations/fade.animation';
 
 // navigation prop is injected automatically by react navigation stack
 export const RestaurantsScreen = ({ navigation }) => {
@@ -29,7 +30,9 @@ export const RestaurantsScreen = ({ navigation }) => {
             }
             activeOpacity={0.7}
           >
-            <RestaurantInfoCard restaurant={item} />
+            <FadeInView>
+              <RestaurantInfoCard restaurant={item} />
+            </FadeInView>
           </TouchableOpacity>
         </Spacer>
       );
