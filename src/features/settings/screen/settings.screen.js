@@ -1,0 +1,43 @@
+import React from 'react';
+import { Avatar, List } from 'react-native-paper';
+import { SafeArea } from '../../../components/utility/safe-area.component';
+import { useAuthentication } from '../../../services/authentication/authentication.context';
+import { Spacer } from '../../../components/spacer/spacer.component';
+import { Text } from '../../../components/typography/text.component';
+import styled from 'styled-components';
+
+const SettingsItem = styled(List.Item)`
+  padding: ${props => props.theme.space[3]};
+`;
+
+const AvatarContainer = styled.View`
+  padding: ${props => props.theme.space[2]};
+  align-items: center;
+`;
+
+export const SettingScreen = ({ navigation }) => {
+  const { onLogout, user } = useAuthentication();
+  return (
+    <SafeArea>
+      <AvatarContainer>
+        <Avatar.Icon size={180} icon="human" backgroundColor="#2182BD" />
+        <Spacer size="large">
+          <Text variant="label">{user.email}</Text>
+        </Spacer>
+      </AvatarContainer>
+      <List.Section>
+        <SettingsItem
+          title="Favourites"
+          description="View your favourites"
+          left={props => <List.Icon {...props} color="black" icon="heart" />}
+          onPress={() => navigation.navigate('Favourites')}
+        />
+        <SettingsItem
+          title="Logout"
+          left={props => <List.Icon {...props} color="black" icon="door" />}
+          onPress={onLogout}
+        />
+      </List.Section>
+    </SafeArea>
+  );
+};

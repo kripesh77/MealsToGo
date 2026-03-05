@@ -3,13 +3,14 @@ import { List } from 'react-native-paper';
 import { SafeArea } from '../../../components/utility/safe-area.component';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import { ScrollView } from 'react-native';
+import { BackButton } from '../../../components/utility/back-button.component';
 
 const BreakfastIcon = props => <List.Icon {...props} icon="bread-slice" />;
 const LunchIcon = props => <List.Icon {...props} icon="hamburger" />;
 const DinnerIcon = props => <List.Icon {...props} icon="food-variant" />;
 const DrinksIcon = props => <List.Icon {...props} icon="cup" />;
 
-export const RestaurantsDetailScreen = ({ route }) => {
+export const RestaurantsDetailScreen = ({ route, navigation }) => {
   const [breakfastExpanded, setBreakfastExpanded] = useState(false);
   const [lunchExpanded, setLunchExpanded] = useState(false);
   const [dinnerExpanded, setDinnerExpanded] = useState(false);
@@ -19,6 +20,7 @@ export const RestaurantsDetailScreen = ({ route }) => {
 
   return (
     <SafeArea>
+      <BackButton navigation={navigation} />
       <RestaurantInfoCard restaurant={restaurant} />
       <ScrollView>
         <List.Accordion

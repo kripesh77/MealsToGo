@@ -84,7 +84,7 @@ export const AuthenticationProvider = ({ children }) => {
     }
   }, []);
 
-  const logout = useCallback(async () => {
+  const onLogout = useCallback(async () => {
     setUser();
     getAuth().signOut();
   }, []);
@@ -98,9 +98,9 @@ export const AuthenticationProvider = ({ children }) => {
       setError,
       onLogin,
       onRegister,
-      logout,
+      onLogout,
     }),
-    [user, isLoading, error, onLogin, onRegister, logout]
+    [user, isLoading, error, onLogin, onRegister, onLogout]
   );
 
   return (

@@ -1,27 +1,17 @@
 import React, { useCallback, useState } from 'react';
-import { FlatList, Platform, Pressable, TouchableOpacity } from 'react-native';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
-import styled from 'styled-components/native';
+import {
+  RestaurantList,
+  Loading,
+  LoadingContainer,
+} from '../components/restaurant-info-card-styles';
 import { Search } from '../components/search.component';
 import { SafeArea } from '../../../components/utility/safe-area.component';
 import { useRestaurants } from '../../../services/restaurants/restaurants.context';
 import { Spacer } from '../../../components/spacer/spacer.component';
-import { ActivityIndicator } from 'react-native-paper';
 import { useFavourites } from '../../../services/favourites/favourites.context';
 import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
-
-const RestaurantList = styled(FlatList).attrs({
-  contentContainerStyle: { padding: 16 },
-})``;
-
-const Loading = styled(ActivityIndicator)`
-  margin-left: -25px;
-`;
-const LoadingContainer = styled.View`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-`;
+import { TouchableOpacity } from 'react-native';
 
 // navigation prop is injected automatically by react navigation stack
 export const RestaurantsScreen = ({ navigation }) => {

@@ -1,15 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeArea } from '../../components/utility/safe-area.component';
-import { Text } from '../../components/typography/text.component';
 import { RestaurantsNavigator } from './restaurants.navigator';
 import { MapScreen } from '../../features/map/screen/maps.screen';
-import { Button } from 'react-native-paper';
-import { useAuthentication } from '../../services/authentication/authentication.context';
 import { FavouritesProvider } from '../../services/favourites/favourites.context';
 import { LocationProvider } from '../../services/location/location.context';
 import { RestaurantsProvider } from '../../services/restaurants/restaurants.context';
+import { SettingNavigator } from './settings.navigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,18 +22,6 @@ const screenOptions = ({ route }) => {
       return <Ionicons name={TAB_ICON[route.name]} size={size} color={color} />;
     },
   };
-};
-
-const Settings = () => {
-  const { logout } = useAuthentication();
-  return (
-    <SafeArea>
-      <Text>Settings</Text>
-      <Button buttonColor="blue" textColor="white" onPress={logout}>
-        Logout
-      </Button>
-    </SafeArea>
-  );
 };
 
 export const AppNavigator = () => {
@@ -63,7 +48,7 @@ export const AppNavigator = () => {
             />
             <Tab.Screen
               name="Settings"
-              component={Settings}
+              component={SettingNavigator}
               options={{ headerShown: false }}
             />
           </Tab.Navigator>

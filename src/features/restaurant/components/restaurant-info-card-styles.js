@@ -1,4 +1,5 @@
-import { Card } from 'react-native-paper';
+import { FlatList } from 'react-native';
+import { ActivityIndicator, Card } from 'react-native-paper';
 import styled from 'styled-components/native';
 
 export const RestaurantCardCover = styled(Card.Cover)`
@@ -22,11 +23,24 @@ export const SectionEnd = styled.View`
 
 export const Section = styled.View`
   flex-direction: row;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
 `;
 
 export const Icon = styled.Image`
   width: 15px;
   height: 15px;
+`;
+
+export const RestaurantList = styled(FlatList).attrs({
+  contentContainerStyle: { padding: 16 },
+})``;
+
+export const Loading = styled(ActivityIndicator)`
+  margin-left: -25px;
+`;
+export const LoadingContainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
 `;
