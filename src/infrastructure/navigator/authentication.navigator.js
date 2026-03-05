@@ -6,6 +6,9 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
+import { AccountScreen } from '../../features/account/screens/account.screen';
+import { LoginScreen } from '../../features/account/screens/login.screen';
+import { RegisterScreen } from '../../features/account/screens/register.screen';
 
 const Stack = createStackNavigator();
 
@@ -17,39 +20,9 @@ export const AuthenticationNavigator = () => {
         ...TransitionPresets.ModalPresentationIOS,
       }}
     >
-      <Stack.Screen name="Account" component={Account} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="Account" component={AccountScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
     </Stack.Navigator>
   );
 };
-
-const Login = () => (
-  <SafeArea>
-    <View>
-      <Text>Login</Text>
-    </View>
-  </SafeArea>
-);
-
-const Signup = () => (
-  <SafeArea>
-    <View>
-      <Text>Signup</Text>
-    </View>
-  </SafeArea>
-);
-
-const Account = ({ navigation }) => (
-  <SafeArea>
-    <View>
-      <Text>Account</Text>
-      <Pressable onPress={() => navigation.navigate('Login')}>
-        <Text>Login</Text>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate('Signup')}>
-        <Text>Signup</Text>
-      </Pressable>
-    </View>
-  </SafeArea>
-);
