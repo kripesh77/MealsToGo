@@ -7,6 +7,9 @@ import { RestaurantsNavigator } from './restaurants.navigator';
 import { MapScreen } from '../../features/map/screen/maps.screen';
 import { Button } from 'react-native-paper';
 import { useAuthentication } from '../../services/authentication/authentication.context';
+import { FavouritesProvider } from '../../services/favourites/favourites.context';
+import { LocationProvider } from '../../services/location/location.context';
+import { RestaurantsProvider } from '../../services/restaurants/restaurants.context';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,28 +41,34 @@ const Settings = () => {
 
 export const AppNavigator = () => {
   return (
-    <Tab.Navigator
-      screenOptions={screenOptions}
-      tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      }}
-    >
-      <Tab.Screen
-        name="Restaurants"
-        component={RestaurantsNavigator}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="Maps"
-        component={MapScreen}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={Settings}
-        options={{ headerShown: false }}
-      />
-    </Tab.Navigator>
+    <FavouritesProvider>
+      <LocationProvider>
+        <RestaurantsProvider>
+          <Tab.Navigator
+            screenOptions={screenOptions}
+            tabBarOptions={{
+              activeTintColor: 'tomato',
+              inactiveTintColor: 'gray',
+            }}
+          >
+            <Tab.Screen
+              name="Restaurants"
+              component={RestaurantsNavigator}
+              options={{ headerShown: false }}
+            />
+            <Tab.Screen
+              name="Maps"
+              component={MapScreen}
+              options={{ headerShown: false }}
+            />
+            <Tab.Screen
+              name="Settings"
+              component={Settings}
+              options={{ headerShown: false }}
+            />
+          </Tab.Navigator>
+        </RestaurantsProvider>
+      </LocationProvider>
+    </FavouritesProvider>
   );
 };

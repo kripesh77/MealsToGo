@@ -45,13 +45,7 @@ export default function App() {
     <>
       <AuthenticationProvider>
         <ThemeProvider theme={theme}>
-          <FavouritesProvider>
-            <LocationProvider>
-              <RestaurantsProvider>
-                <Navigation />
-              </RestaurantsProvider>
-            </LocationProvider>
-          </FavouritesProvider>
+          <Navigation />
         </ThemeProvider>
       </AuthenticationProvider>
       <StatusBar style="auto" />
